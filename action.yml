@@ -60,6 +60,7 @@ runs:
     - name: Sync with latest
       run: |
         git pull
+      shell: bash
     -
       name: "Setup python"
       uses: actions/setup-python@v4
