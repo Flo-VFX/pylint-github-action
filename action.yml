@@ -96,6 +96,15 @@ runs:
         ${{ steps.parameters-badge.outputs.badge_color }}
       shell: bash
     -
+      # The checkout is the commit that triggered the run. Another job may
+      # have pushed to the branch since (a Main CI badge commit, say), which
+      # would make the push below a non-fast-forward. --autostash because the
+      # README edit above is not committed yet.
+      name: "Sync with latest"
+      run: |
+        git pull --rebase --autostash
+      shell: bash
+    -
       name: "Push README with changed badge to origin"
       uses: EndBug/add-and-commit@v9
       with:
